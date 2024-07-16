@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TARGOBANK Financing</title>
+</head>
+<body>
+    <form id="targobankForm" action="https://www.targobank.de/de/app/indirectloanrequest.html" method="POST" target="_blank">
+        <input type="hidden" name="koop_id" value="villastore241">
+        <input type="hidden" name="sessionID" value="xyz">
+        <input type="hidden" name="amount" value="499.99">
+        <input type="hidden" name="dealerID" value="804625">
+        <input type="hidden" name="dealerText" value="https://villamoebel.de/return">
+        <input type="hidden" name="documentno" value="order12345">
+        <input type="hidden" name="dealerShopURL" value="https://villamoebel.de/success">
+        <input type="hidden" name="dealerRejectURL" value="https://villamoebel.de/reject">
+        <input type="hidden" name="dealerAbortURL" value="https://villamoebel.de/abort">
+        <input type="hidden" name="hash" id="hash" value="">
+        <input type="hidden" name="gender" value="m">
+        <input type="hidden" name="surname" value="Doe">
+        <input type="hidden" name="firstname" value="John">
+        <input type="hidden" name="street" value="Main Street">
+        <input type="hidden" name="streetnumber" value="1">
+        <input type="hidden" name="zip" value="12345">
+        <input type="hidden" name="city" value="Düsseldorf">
+        <input type="hidden" name="telnocode" value="0211">
+        <input type="hidden" name="telno" value="123456">
+        <input type="hidden" name="birthday" value="1970-01-01">
+        <input type="hidden" name="email" value="john.doe@example.com">
+    </form>
+
+    <script>
+        window.onload = async function() {
+            const queryString = "amount=499.99&koop_id=villastore241&dealerText=https%3A%2F%2Fvillamoebel.de%2Freturn&documentno=order12345";
+            const response = await fetch(`/generate-hash?queryString=${encodeURIComponent(queryString)}`);
+            const data = await response.json();
+            document.getElementById('hash').value = data.hash;
+            document.getElementById('targobankForm').submit();
+        }
+    </script>
+</body>
+</html>
